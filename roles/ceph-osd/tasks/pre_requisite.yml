@@ -7,9 +7,12 @@
 
 - name: install dependencies
   yum:
-    name: parted
+    name: "{{ item }}"
     state: present
   when: ansible_os_family == 'RedHat'
+  with_items:
+    - parted
+    - redhat-lsb
 
 - name: create bootstrap-osd directory
   file:
